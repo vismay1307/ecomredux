@@ -1,7 +1,7 @@
 import { getProducts } from "@/lib/api";
-import ProductGrid from "@/components/product/ProductGrid";
+import FilteredProducts from "@/components/product/FilteredProducts";
 import Pagination from "@/components/layout/Pagination";
-
+import ProductFilters from "@/components/product/ProductFilters";
 interface ProductsPageProps {
   searchParams: Promise<{
     page?: string;
@@ -37,8 +37,8 @@ export default async function ProductsPage({
           {data.total} products
         </p>
       </div>
-
-      <ProductGrid products={data.products} />
+<ProductFilters />
+      <FilteredProducts products={data.products} />
 
       <Pagination
         currentPage={page}
