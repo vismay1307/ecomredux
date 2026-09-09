@@ -3,6 +3,7 @@ import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import StoreProvider from "@/components/providers/StoreProvider";
 
 export const metadata: Metadata = {
   title: "ShelfCart",
@@ -17,13 +18,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-white text-gray-900">
-        <Navbar />
+        <StoreProvider>
+          <Navbar />
 
-        <div className="min-h-[calc(100vh-4rem)]">
-          {children}
-        </div>
+          <div className="min-h-[calc(100vh-4rem)]">
+            {children}
+          </div>
 
-        <Footer />
+          <Footer />
+        </StoreProvider>
       </body>
     </html>
   );
