@@ -1,32 +1,50 @@
 "use client";
 
-export default function Error({
-  reset,
-}: {
+import { useEffect } from "react";
+import Link from "next/link";
+
+interface ProductErrorProps {
   error: Error & { digest?: string };
   reset: () => void;
-}) {
-  return (
-    <main className="flex min-h-[60vh] items-center justify-center px-6">
-      <div className="text-center">
-        <p className="text-sm font-medium text-gray-500">
-          Something went wrong
-        </p>
+}
 
-        <h1 className="mt-2 text-3xl font-bold">
-          Couldn't load products
+export default function ProductError({
+  error,
+  reset,
+}: ProductErrorProps) {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
+
+  return (
+    <main className="mx-auto flex min-h-[60vh] max-w-7xl items-center justify-center px-6">
+      <div className="max-w-md text-center">
+        <div className="text-6xl">📦</div>
+
+        <h1 className="mt-5 text-3xl font-bold">
+          Product unavailable
         </h1>
 
         <p className="mt-3 text-gray-500">
-          The product service is temporarily unavailable.
+          We couldn&apos;t load this product.
+          Please try again or browse other products.
         </p>
 
-        <button
-          onClick={() => reset()}
-          className="mt-6 rounded-lg bg-black px-5 py-3 text-sm font-medium text-white hover:opacity-90"
-        >
-          Try again
-        </button>
+        <div className="mt-6 flex justify-center gap-3">
+          <button
+            onClick={() => reset()}
+            className="rounded-lg bg-black px-5 py-3 text-sm font-medium text-white"
+          >
+            Try Again
+          </button>
+
+          <Link
+            href="/products"
+            className="rounded-lg border px-5 py-3 text-sm font-medium hover:bg-gray-50"
+          >
+            Browse Products
+          </Link>
+        </div>
       </div>
     </main>
   );
