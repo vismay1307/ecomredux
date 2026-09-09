@@ -5,7 +5,7 @@ import { useAppDispatch } from "@/store/hooks";
 import { addToCart } from "@/store/slices/cartSlice";
 import { addRecentlyViewed } from "@/store/slices/recentlyViewedSlice";
 import { Product } from "@/lib/types";
-
+import RecentlyViewed from "./RecentlyViewed";
 /* eslint-disable @next/next/no-img-element */
 
 interface ProductDetailsProps {
@@ -22,6 +22,7 @@ export default function ProductDetails({
   }, [dispatch, product]);
 
   return (
+    <>
     <main className="mx-auto max-w-7xl px-6 py-10">
       <div className="grid gap-10 lg:grid-cols-2">
         {/* Product Image */}
@@ -87,6 +88,8 @@ export default function ProductDetails({
           </button>
         </div>
       </div>
+      <RecentlyViewed />
     </main>
+    </>
   );
 }

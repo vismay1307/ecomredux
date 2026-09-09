@@ -17,11 +17,13 @@ export default async function ProductPage({
     notFound();
   }
 
-  try {
-    const product = await getProduct(productId);
+  let product;
 
-    return <ProductDetails product={product} />;
+  try {
+    product = await getProduct(productId);
   } catch {
     notFound();
   }
-}
+
+  return <ProductDetails product={product} />;
+} 
