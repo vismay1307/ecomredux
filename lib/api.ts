@@ -6,15 +6,26 @@ export async function getProducts(
   limit = 12,
   skip = 0
 ): Promise<ProductsResponse> {
-  const response = await fetch(
-    `${BASE_URL}/products?limit=${limit}&skip=${skip}`
-  );
+  const url = `${BASE_URL}/products?limit=${limit}&skip=${skip}`;
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch products");
+  try {
+    const response = await fetch(url, {
+      next: {
+        revalidate: 60,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch products: ${response.status}`
+      );
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("getProducts error:", error);
+    throw new Error("Unable to load products right now.");
   }
-
-  return response.json();
 }
 
 export async function getProduct(id: number): Promise<Product> {
